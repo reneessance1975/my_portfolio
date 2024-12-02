@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Galeria de Fotografias de Concertos">
     <title>Minha Galeria Moderna</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -10,21 +11,160 @@
     <header>
         <h1>Concert Photography</h1>
     </header>
+
     <main>
         <div class="gallery">
-            <img src="/images/foto1.jpeg" alt="Foto 1" onclick="openLightbox(this)">
-            <img src="/images/foto2.jpeg" alt="Foto 2" onclick="openLightbox(this)">
-            <img src="/images/foto3.jpeg" alt="Foto 3" onclick="openLightbox(this)">
-            <img src="/images/" alt="Foto 4" onclick="openLightbox(this)">
-            <img src="foto5.jpg" alt="Foto 5" onclick="openLightbox(this)">
+            <img src="/images/foto1.jpeg" alt="Foto do concerto 1" onclick="openLightbox(this)">
+            <img src="/images/foto2.jpeg" alt="Foto do concerto 2" onclick="openLightbox(this)">
+            <img src="/images/foto3.jpeg" alt="Foto do concerto 3" onclick="openLightbox(this)">
+            <img src="/images/foto4.jpeg" alt="Foto do concerto 4" onclick="openLightbox(this)">
+            <img src="/images/foto5.jpg" alt="Foto do concerto 5" onclick="openLightbox(this)">
         </div>
     </main>
+
     <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <img id="lightboxImage" src="" alt="Foto Ampliada">
+        <img id="lightboxImage" src="" alt="Foto ampliada do concerto">
     </div>
+
     <footer>
         <p>©️ 2024 - Minha Galeria Moderna</p>
     </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and background */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1f1f1f;
+    color: #fff;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: linear-gradient(135deg, #2c2c2c, #1f1f1f);
+}
+
+/* Header Styles */
+header {
+    background-color: #111;
+    color: #f7f7f7;
+    text-align: center;
+    padding: 20px;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Main Gallery Section */
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Gallery container */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 10px;
+    justify-items: center;
+}
+
+/* Individual image styling */
+.gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Image hover effect */
+.gallery img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Lightbox Styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.lightbox img {
+    max-width: 95%;
+    max-height: 95%;
+    border-radius: 10px;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #111;
+    color: #f7f7f7;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    header {
+        font-size: 1.8rem;
+    }
+
+    footer {
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    header {
+        font-size: 1.6rem;
+    }
+
+    footer {
+        font-size: 0.7rem;
+    }
+}
+// JavaScript for Lightbox
+function openLightbox(imageElement) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    
+    // Set the lightbox image source to the clicked image
+    lightboxImage.src = imageElement.src;
+    lightbox.style.display = 'flex'; // Show the lightbox
+    lightbox.style.opacity = '1';    // Smooth transition
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.style.opacity = '0';    // Fade-out transition
+    setTimeout(() => {
+        lightbox.style.display = 'none'; // Hide after fade
+    }, 500);
+}
+
